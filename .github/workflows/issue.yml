@@ -1,12 +1,13 @@
-name: Autocloser
-on: [issues, pull_request]
+on:
+  issues:
+    types: [opened]
 jobs:
-  autoclose:
+  titlePrefixCheck:
     runs-on: ubuntu-latest
     steps:
-    - name: Autoclose issues that did not follow issue template
-      uses: roots/issue-closer@v1.1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-close-message: "@${issue.user.login} this issue was automatically closed because it did not follow the issue template"
-        issue-pattern: ".*guidelines for Contributing.*"
+      - if: startsWith(github.event.issue.title, 'example') == 'true'
+        name: Close Issue
+        uses: peter-evans/close-issue@v1
+        with:
+          comment: |
+            Do not open example issue
