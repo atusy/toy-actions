@@ -6,7 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.issue.labels.*.name, 'question')
     steps:
-      - if: contains(github.event.issue.title, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.\n- [x] I have provided the link to the the question on Stack Overflow.\n- [x] I have provided a reproducible example.') != 'true'
+      - if: |
+        contains(github.event.issue.title, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.') != 'true' ||
+        contains(github.event.issue.title, '- [x] I have provided the link to the the question on Stack Overflow.') != 'true' ||
+        contains(github.event.issue.title, '- [x] I have provided a reproducible example.) != 'true'
         name: Close Issue
         uses: peter-evans/close-issue@v1
         with:
