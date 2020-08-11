@@ -5,9 +5,10 @@ jobs:
   titlePrefixCheck:
     runs-on: ubuntu-latest
     steps:
-      - if: startsWith(github.event.issue.title, 'example') == 'true'
+      - if: startsWith(github.event.issue.title, 'ABC-') != 'true'
         name: Close Issue
         uses: peter-evans/close-issue@v1
         with:
           comment: |
-            Do not open example issue
+            Issue title must start with 'ABC-'.
+            Auto-closing this issue.
