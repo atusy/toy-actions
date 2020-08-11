@@ -10,7 +10,7 @@ jobs:
         env:
           BODY: ${{ contains(github.event.issue.body, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.') }}
         run: echo $BODY
-      - if: !contains(github.event.issue.body, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.')
+      - if: contains(github.event.issue.body, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.')
         name: Close Issue
         uses: peter-evans/close-issue@v1
         with:
