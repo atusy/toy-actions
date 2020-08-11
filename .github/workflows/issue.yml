@@ -10,6 +10,9 @@ jobs:
           (contains(github.event.issue.body, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.')) != 'true'
         name: Close Issue
         uses: peter-evans/close-issue@v1
+        env:
+          BODY: ${{ github.event.issue.body }}$$
+        run: echo $BODY
         with:
           comment: |
             Please promise to follow the issue guide, and then replace `[ ]` by `[x]`.
