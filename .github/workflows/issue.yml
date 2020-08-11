@@ -10,7 +10,7 @@ jobs:
         (
           contains(github.event.issue.title, '- [x] I have asked the question on Stack Overflow and weighted 24 hours.') &&
           contains(github.event.issue.title, '- [x] I have provided the link to the the question on Stack Overflow.') &&
-          contains(github.event.issue.title, '- [x] I have provided a reproducible example.)
+          contains(github.event.issue.title, '- [x] I have provided a reproducible example.')
         ) != 'true'
         name: Close Issue
         uses: peter-evans/close-issue@v1
