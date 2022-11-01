@@ -1,0 +1,20 @@
+name: ldd
+
+on: push
+
+jobs:
+  ldd:
+    strategy:
+      matrix:
+        image:
+          - "arm64v8/debian:sid-slim"
+          - "arm64v8/ubuntu:22.04"
+          - "arm64v8/ubuntu:18.04"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: docker/setup-qemu-action@v2
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: docker pull ${{ matrix.image }}
+      - run: docker run --rm ${{ matrix.image }} ldd /bin/ls
