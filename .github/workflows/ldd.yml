@@ -18,6 +18,6 @@ jobs:
           fetch-depth: 0
       - run: |
           curl -o qemu.deb http://launchpadlibrarian.net/606368505/qemu-user-static_4.2-3ubuntu6.23_amd64.deb
-          dpkg -i qemu.deb
+          sudo dpkg -i qemu.deb
       - run: docker pull ${{ matrix.image }}
       - run: docker run --rm ${{ matrix.image }} ldd /usr/bin/python3
