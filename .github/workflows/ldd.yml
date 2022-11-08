@@ -10,7 +10,7 @@ jobs:
           # - "arm64v8/debian:sid-slim"
           # - "arm64v8/ubuntu:22.04"
           - "arm64v8/ubuntu:14.04"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with:
