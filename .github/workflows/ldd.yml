@@ -1,0 +1,23 @@
+name: ldd
+
+on: push
+
+jobs:
+  ldd:
+    strategy:
+      matrix:
+        image:
+          # - "arm64v8/debian:sid-slim"
+          # - "arm64v8/ubuntu:22.04"
+          - "arm64v8/ubuntu:14.04"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: sudo apt-get update && sudo apt-cache show qemu-user-static
+      - run: sudo apt-get update && sudo apt-get install qemu-user-static
+      - uses: docker/setup-qemu-action@v1
+      - run: dpkg -l | grep qemu
+      - run: docker pull ${{ matrix.image }}
+      - run: docker run --rm ${{ matrix.image }} ldd /usr/bin/python3
