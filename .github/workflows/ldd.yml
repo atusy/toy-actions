@@ -10,14 +10,16 @@ jobs:
           # - "arm64v8/debian:sid-slim"
           # - "arm64v8/ubuntu:22.04"
           - "arm64v8/ubuntu:14.04"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - run: sudo apt-get update && sudo apt-cache show qemu-user-static
       # - run: |
       #     curl -o qemu.deb http://launchpadlibrarian.net/606368505/qemu-user-static_4.2-3ubuntu6.23_amd64.deb
       #     sudo dpkg -i qemu.deb
       - uses: docker/setup-qemu-action@v1
+      - run: dpkg -l | grep qemu
       - run: docker pull ${{ matrix.image }}
       - run: docker run --rm ${{ matrix.image }} ldd /usr/bin/python3
